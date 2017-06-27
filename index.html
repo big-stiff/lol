@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>英雄联盟官方网站-腾讯游戏</title>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/public.css"/>
+    <script src="js/pbulic.js" type="text/javascript"></script>
+    <script >
+        window.onload = function () {
+//            返回ID函数开始
+            function $Id(obj) {
+                return document.getElementById(obj);
+            }
+//            返回ID函数结束
+//          触碰导航开始
+            $Id('cause_touch').onmouseover = function () {
+                $Id('touch_nav').style.visibility = 'visible';
+            };
+            $Id('cause_touch').onmouseout = function ()
+            {
+                $Id('touch_nav').style.visibility = 'hidden';
+            };
+//            触碰导航结束
+
+            var len = $Id('txtdec').getElementsByTagName('li').length;
+            var li_ = $Id('txtdec').getElementsByTagName('li');
+            var imgbox = $Id('imgbox');
+            var start = 0,end = 0;
+            li_[0].style.backgroundColor = '#36AB87';
+            li_[0].style.color= '#fff';
+            for(var i =0;i<len;i++){
+                li_[i].index = i;
+                li_[i].onmouseover = function(){
+                    for(var i =0;i<len;i++){
+                        li_[i].style.backgroundColor = '#EFEFEF';
+                        li_[i].style.color = '#333';
+                }
+                this.style.backgroundColor = '#36AB87';
+                    this.style.color= '#fff';
+                    end = -780 * this.index;
+                    setInterval(function () {
+                        start = start + (end - start) / 100;
+                        imgbox.style.left = start + 'px';
+                    },5)
+                }
+            }
+
+//            视频点击出现播放图标开始
+            var video_a = $Id('videotogether').getElementsByTagName('a');
+            var video_i = $Id('videotogether').getElementsByTagName('i');
+            var video_len = $Id('videotogether').getElementsByTagName('a').length;
+            for(var j =0;j<video_len;j++) {
+                video_a[j].index = j;
+                video_a[j].onmouseover = function () {
+                    for(var j =0;j<video_len;j++){
+                        video_i[j].style.display='none';
+                    }
+                    video_i[this.index].style.display = 'block';
+                };
+                video_a[j].onmouseout = function () {
+                    for(var j =0;j<video_len;j++){
+                    video_i[j].style.display='none';
+                    }
+                }
+            }
+//            视频点击出现播放图标结束
+//            触碰切换标题栏（底边四像素）开始
+            function touchNav(obj,a,b,c,d,e,f){
+                var len1 = $Id(obj).getElementsByTagName('li').length;
+                var li_nav = $Id(obj).getElementsByTagName('li');
+                var arr =[a,b,c,d,e,f];
+                li_nav[0].className='current';
+                for(var u =0;u<len1;u++){
+                    li_nav[u].index = u;
+                    li_nav[u].onmouseover = function(){
+                        for(var u =0;u<len1;u++){
+                            li_nav[u].className= '';
+                            $Id(arr[u]).style.display = 'none';
+                        }
+                        this.className= 'current';
+                        $Id(arr[this.index]).style.display = 'block';
+                    }
+                }
+            }
+//            触碰切换标题栏（底边四像素）结束
+            touchNav('nav','news','notice','match','bbs');
+            touchNav('main2_nav_video','zxsp','jssp','zmyx','sssp','qwjj','gfsp');
+            touchNav('main2_nav_match','zyls','jjzyls','dmxyb','gxls','csyxzbs','wzxg');
+            touchNav('main2_nav_service','self_service','FAQ');
+            touchNav('main2_nav_hero','free_hero','latest_hero','latest_skin');
+//            点击显示8个视频开始
+            $Id('show8').onclick= function() {
+                var arr = [$Id('zxsp'),$Id('jssp'),$Id('zmyx'),$Id('sssp'),$Id('qwjj'),$Id('gfsp')];
+                var len = arr.length;
+                for(var j=0; j<len; j++){
+                    arr[j].style.overflow='visible';
+                }
+                $Id('show8').innerHTML='显示更多视频';
+                $Id('qt_store').style.paddingBottom = '500px';
+            };
+//            点击显示8个视频结束
+//            鼠标停留显示信息开始
+            function txtDetail (id) {
+            var a =$Id(id).getElementsByTagName('a');
+            for (var j=0,len= a.length; j<len; j++){
+                var i =document.createElement('i');
+                i.className = 'txt_detail';
+                a[j].appendChild(i);
+            }
+            }
+//            鼠标停留显示信息结束
+            txtDetail('latest_skin');
+            txtDetail('latest_hero');
+            txtDetail('free_hero');
+//          英雄 /皮肤鼠标停留开始
+            function touchTxt(id) {
+                var a = $Id(id).getElementsByTagName('a');
+                var len = a.length;
+                var cn = getClass('txt_detail',id);
+                var em =$Id(id).getElementsByTagName('em');
+                for (var j = 0; j < len; j++) {
+                    a[j].index = j;
+                    a[j].onmouseover = function () {
+                        for (var j = 0; j < len; j++) {
+                            cn[j].style.display = 'none';
+                            em[j].style.display = 'none';
+                        }
+                        cn[this.index].style.display = 'block';
+                        em[this.index].style.display = 'block';
+
+                    }
+                    a[j].onmouseout = function () {
+                        for (var j = 0; j < len; j++) {
+                            cn[j].style.display = 'none';
+                            em[j].style.display = 'none';
+                        }
+                    }
+
+                }
+
+            }
+//          英雄 /皮肤鼠标停留结束
+            touchTxt('latest_hero');
+            touchTxt('free_hero');
+            touchTxt('latest_skin');
+//            快速入口鼠标停留变色开始
+            function touchChangeIcon(id) {
+                var a = $Id(id).getElementsByTagName('a');
+                var i =$Id(id).getElementsByTagName('i');
+                var len = a.length;
+                for (var j = 0; j < len; j++) {
+                    a[j].index = j;
+                    a[j].onmouseover = function () {
+                        for (var j = 0; j < len; j++) {
+                            a[j].style.color = '#555555';
+                            i[j].style.backgroundPositionY = '-40px';
+                        }
+                        a[this.index].style.color = '#029f7f';
+                        i[this.index].style.backgroundPositionY = '-80px';
+
+                    }
+                    a[j].onmouseout = function () {
+                        for (var j = 0; j < len; j++) {
+                            a[j].style.color = '#555555';
+                            i[j].style.backgroundPositionY = '-40px';
+                        }
+                    }
+
+                }
+
+            }
+//            快速入口鼠标停留变色结束
+            touchChangeIcon('quick_icon_width');
+
+            $Id('event_detail_l') .onmouseover = function (){
+                $Id('event_intro_a').style.display = 'block';
+            }
+            $Id('event_detail_l') .onmouseout = function (){
+                $Id('event_intro_a').style.display = 'none';
+            }
+//            banner图标遍历开始
+            var banner_nav_span = $Id('banner_nav').getElementsByTagName('span');
+            var banner_nav_len = banner_nav_span.length;
+            for(var i = 0;i<banner_nav_len; i++){
+                if(i==4) {
+                    banner_nav_span[i].style.backgroundPositionX = +(i*(-40)-40)+'px';
+                    break;
+                }
+                banner_nav_span[i].style.backgroundPositionX = +i*(-40)+'px';
+            }
+//            banner图标遍历结束
+//            合作媒体点击开始
+             $Id('team_work_txt').onclick = function (event) {
+                var event = event || window.event;
+                 $Id('hideteam_work').style.display = 'block';
+                 stopPropa();
+             }
+             $Id('hideteam_work').onclick = function (event) {
+                 var event = event || window.event;
+                 stopPropa();
+             }
+            document.onclick = function (event) {
+                var event = event || window.event;
+                var target =  event.target.id ? event.target.id : event.srcElement.id;
+                if(target != 'hideteam_work')
+                 $Id('hideteam_work').style.display = 'none';
+             }
+
+//            合作媒体点击结束
+
+
+        }
+
+    </script>
+
+</head>
+<body>
+<!--头部开始-->
+<div class="header clearfix" >
+    <div id="cause_touch">
+    <div class="w nav clearfix">
+        <ul>
+            <li class="fr first" ><a href="javascript:">个人中心<span>USER CENTER</span></a></li>
+            <li class="fr"><a href="javascript:">自助系统<span>SYSTEM</span></a></li>
+            <li class="fr"><a href="javascript:">赛事中心<span>EVENTS</span></a></li>
+            <li class="fr"><a href="javascript:">用户互动<span>COMMUNITY</span></a></li>
+            <li class="fr"><a href="javascript:">商城/合作<span>STORE</span></a></li>
+            <li class="fr"><a href="javascript:">游戏资料<span>GAME INFO</span></a></li>
+            <li class="fr"><a href="javascript:">官网首页<span>HOME</span></a></li>
+        </ul>
+
+    </div>
+        <!--触碰导航开始-->
+        <div class="touch_nav" id="touch_nav" >
+            <div class="w">
+                <ul>
+                    <li><a href="javascript:">个人资料</a></li>
+                    <li><a href="javascript:">我的英雄与皮肤</a></li>
+                    <li><a href="javascript:">战绩历史</a></li>
+                </ul>
+                <ul>
+                    <li><a href="javascript:">封号查询</a></li>
+                    <li><a href="javascript:">体验服申请</a></li>
+                    <li><a href="javascript:">服务器状态查询</a></li>
+                    <li><a href="javascript:">裁决之镰</a></li>
+                </ul>
+                <ul>
+                    <li><a href="javascript:">LPL职业联赛</a></li>
+                    <li><a href="javascript:">甲级职业联赛</a></li>
+                    <li><a href="javascript:">德玛西亚杯</a></li>
+                    <li><a href="javascript:">城市英雄争霸赛</a></li>
+                    <li><a href="javascript:">高校联赛</a></li>
+                    <li><a href="javascript:">校际精英赛</a></li>
+                </ul>
+                <ul>
+                    <li><a href="javascript:">在线客服</a></li>
+                    <li><a href="javascript:">活动中心</a></li>
+                    <li><a href="javascript:">官方论坛</a></li>
+                    <li><a href="javascript:">官方微信</a></li>
+                    <li><a href="javascript:">官方微博</a></li>
+                </ul>
+                <ul>
+                    <li><a href="javascript:">点卷充值</a></li>
+                    <li><a href="javascript:">道聚城</a></li>
+                    <li><a href="javascript:">官方周边商城</a></li>
+                    <li><a href="javascript:">英雄联盟桌游</a></li>
+                    <li><a href="javascript:">LOL信用卡</a></li>
+                    <li><a href="javascript:">网吧特权</a></li>
+                </ul>
+                <ul>
+                    <li><a href="javascript:">新手指引</a></li>
+                    <li><a href="javascript:">资料库</a></li>
+                    <li><a href="javascript:">攻略中心</a></li>
+                    <li><a href="javascript:">模式实验室</a></li>
+                    <li><a href="javascript:">海克斯战利品库</a></li>
+                    <li><a href="javascript:">屏保下载</a></li>
+                    <li><a href="javascript:" class="universe"><i></i>英雄联盟 宇宙</a></li>
+                </ul>
+
+            </div>
+        </div>
+        <!--触碰导航结束-->
+    </div>
+    <div class="logo">
+        <a href="http://lol.qq.com" class="db">英雄联盟官网：英雄，一起去超越</a>
+    </div>
+
+</div>
+<!--头部结束-->
+<!--banner开始-->
+<div class="big_banner clearfix">
+    <video src="images/big-banner.mp4" autoplay loop class="big_video" >
+    <source src="images/big-banner.webm" type="video/webm">
+    <source src="images/big-banner.mp4" type="video/mp4">
+</video>
+<div class="banner w ">
+
+    <div class="banner_text">
+        <h1>全新大区男爵领域开启</h1>
+        <h2>电信网通移动互通 ，天南海北同场竞技，更有六重豪礼助你快速满级。</h2>
+        <a href="http://lol.qq.com/act/a20170216baron/?ADTAG=lolweb.header.act" target="_blank"><em class="db">查看详情</em></a>
+    </div>
+    <div class="version">
+        当前游戏版本：<em>Ver 7.3</em>
+        <a href="http://lol.qq.com/webplat/info/news_version3/152/22006/m14290/201702/552008.shtml" target="_blank">版本详情</a>
+    </div>
+    <div class="banner_nav w" id="banner_nav">
+        <a href="http://lol.qq.com/download.shtml" class="download_g fl">游戏下载</a>
+        <ul class="fl">
+            <li>
+                <a href="http://lol.qq.com/act/a20110418gifts/">
+                <span></span>
+                <h1>新手礼包</h1>
+                <h2>新手任务好礼</h2>
+                </a>
+            </li>
+            <li>
+                <a href="http://lol.qq.com/v/">
+                <span></span>
+                <h1>视频中心</h1>
+                <h2>最新最全视频</h2>
+                </a>
+            </li>
+            <li>
+                <a href="http://lpl.qq.com/" target="_blank">
+                <span></span>
+                <h1>赛事中心</h1>
+                <h2>权威赛事数据</h2>
+                </a>
+            </li>
+            <li>
+                <a href="http://lol.qq.com/web201310/info-heros.shtml" target="_blank">
+                <span></span>
+                <h1>游戏资料</h1>
+                <h2>海量英雄资料</h2>
+                 </a>
+            </li>
+            <li>
+                <a href="http://lol.qq.com/act/20160407lcu/index.shtml" target="_blank">
+                    <span></span>
+                <h1>新版客户端</h1>
+                <h2>用户体验升级</h2>
+                </a>
+            </li>
+        </ul>
+        <div class="nav_log fl">
+            <img src="images/ttt.png" class="log_icon fl">
+            <div class="log_message fl">
+                <h1 class="log_welcome ">亲爱的召唤师，欢迎<a href="">登陆</a></h1>
+                <p>登陆后查看自己的英雄联盟游戏信息，包括 <br/><em>召唤师等级、段位信息、游戏胜场数、账户信息、声望值</em>等。</p>
+            </div>
+        </div>
+    </div>
+</div></div>
+<!--banner结束-->
+<!--主体1开始-->
+<div class="main w clearfix pr">
+    <div class="main_l fl pr" id="main_l">
+        <div id="imgbox" class="pa">
+            <span class="pic show" id="1"><a href="#"><img src="images/txbb.jpg" alt=""></a></span>
+            <span class="pic" id="2"><a href="#"><img src="images/eyxj.jpg" alt=""></a></span>
+            <span class="pic" id="3"><a href="#"><img src="images/sc.jpg" alt=""></a></span>
+            <span class="pic" id="4"><a href="#"><img src="images/njly.jpg" alt=""></a></span>
+            <span class="pic" id="5"><a href="#"><img src="images/qrj.jpg" alt=""></a></span>
+        </div>
+        <div class="txtdec pa" id="txtdec">
+            <ul>
+                <li>甜心宝贝琴音和弦</li>
+                <li>厄运小姐的赏金任务</li>
+                <li>LSPL28日赛程</li>
+                <li>新大区男爵领域</li>
+                <li>2017情人节活动</li>
+            </ul>
+        </div>
+    </div>
+    <div class="main_r fl">
+        <div class="nav" id="nav">
+            <ul>
+                <li>综合</li>
+                <li>公告</li>
+                <li>赛事</li>
+                <li>论坛</li>
+            </ul>
+            <a href="#" class="fl">···</a>
+        </div>
+        <div class="news" id="news" style="display: block">
+            <h1><a href="#">厄运小姐的赏金任务开启</a></h1>
+            <ul>
+                <li><a href="#"><em>新闻</em>男爵领域冲级赛违规召唤师处罚说明公告<span>02/11</span></a></li>
+                <li><a href="#"><em>新闻</em>LPL英雄数据回顾 茂凯当选三幻神之首<span>02/11</span></a></li>
+                <li><a href="#"><em>新闻</em>2月28日早7点30版本停机更新公告<span>02/11</span></a></li>
+                <li><a href="#"><em>新闻</em>@英雄联盟官博带你看 男爵领域ID抢注大战<span>02/15</span></a></li>
+                <li><a href="#"><em>新闻</em>皮城祖安故事微访谈精彩对话<span>02/21</span></a></li>
+                <li><a href="#"><em>新闻</em>2月24日全大区排位赛系统维护公告<span>02/17</span></a></li>
+                <li><a href="#"><em>新闻</em>改名卡及金币经验卡限时半价销售公告<span>02/17</span></a></li>
+            </ul>
+        </div>
+        <div class="notice" id="notice">
+            <h1><a href="#">无限乱斗双倍经验金币3月3日开启</a></h1>
+            <ul>
+                <li><a href="#"><em>公告</em>2月28日早7点30版本停机更新公告<span>02/19</span></a></li>
+                <li><a href="#"><em>公告</em>男爵领域冲级赛违规召唤师处罚说明公告<span>02/12</span></a></li>
+                <li><a href="#"><em>公告</em>LPL英雄数据回顾 茂凯当选三幻神之首<span>02/16</span></a></li>
+                <li><a href="#"><em>公告</em>@英雄联盟官博带你看 男爵领域ID抢注大战<span>02/25</span></a></li>
+                <li><a href="#"><em>公告</em>2月24日全大区排位赛系统维护公告<span>02/17</span></a></li>
+                <li><a href="#"><em>公告</em>皮城祖安故事微访谈精彩对话<span>02/21</span></a></li>
+                <li><a href="#"><em>公告</em>改名卡及金币经验卡限时半价销售公告<span>02/17</span></a></li>
+            </ul>
+        </div>
+        <div class="match" id="match">
+            <h1><a href="#">3月2日WE对阵SS Condi迎来Mint挑战</a></h1>
+            <ul>
+                <li><a href="#"><em>赛事</em>LPL英雄数据回顾 茂凯当选三幻神之首<span>02/11</span></a></li>
+                <li><a href="#"><em>赛事</em>男爵领域冲级赛违规召唤师处罚说明公告<span>02/11</span></a></li>
+                <li><a href="#"><em>赛事</em>2月28日早7点30版本停机更新公告<span>02/11</span></a></li>
+                <li><a href="#"><em>赛事</em>@英雄联盟官博带你看 男爵领域ID抢注大战<span>02/15</span></a></li>
+                <li><a href="#"><em>赛事</em>皮城祖安故事微访谈精彩对话<span>02/21</span></a></li>
+                <li><a href="#"><em>赛事</em>改名卡及金币经验卡限时半价销售公告<span>02/17</span></a></li>
+                <li><a href="#"><em>赛事</em>2月24日全大区排位赛系统维护公告<span>02/17</span></a></li>
+            </ul>
+        </div>
+        <div class="bbs" id="bbs">
+            <h1><a href="#">【问拳头第十四期】玛尔扎哈杀死那位女士</a></h1>
+            <ul>
+                <li><a href="#"><em>论坛</em>男爵领域冲级赛违规召唤师处罚说明公告<span>02/11</span></a></li>
+                <li><a href="#"><em>论坛</em>LPL英雄数据回顾 茂凯当选三幻神之首<span>02/11</span></a></li>
+                <li><a href="#"><em>论坛</em>@英雄联盟官博带你看 男爵领域ID抢注大战<span>02/15</span></a></li>
+                <li><a href="#"><em>论坛</em>2月28日早7点30版本停机更新公告<span>02/11</span></a></li>
+                <li><a href="#"><em>论坛</em>2月24日全大区排位赛系统维护公告<span>02/17</span></a></li>
+                <li><a href="#"><em>论坛</em>皮城祖安故事微访谈精彩对话<span>02/21</span></a></li>
+                <li><a href="#"><em>论坛</em>改名卡及金币经验卡限时半价销售公告<span>02/17</span></a></li>
+            </ul>
+        </div>
+
+        <div class="feedback tc"><a href="javascript:" class="db">【调研】留下你的意见，我们会做得更好！</a></div>
+    </div>
+</div>
+<!--主体1结束-->
+<!--主体2开始-->
+<div class="w main2 clearfix">
+     <div class="main2_l fl clearfix">
+        <div class="video pr clearfix">
+        <h1 class="tl"><em class="dib icon_video"></em>视频中心</h1>
+        <a href="javascript:" class="tg_spzx pa"><span class="pa tg tc"><i ></i>我要投稿</span><span class="pa spzx tc">进入视频中心</span></a>
+        <div class="main2_nav_video" id="main2_nav_video">
+               <ul>
+                <li>最新视频</li>
+                <li>解说视频</li>
+                <li>周免英雄</li>
+                <li>赛事视频</li>
+                <li>趣味锦集</li>
+                <li>官方视频</li>
+               </ul>
+        </div>
+       <div class="videotogether clearfix" id="videotogether">
+        <ul id="zxsp" class="zxsp pub" style="display: block">
+            <li><a href="javascript:"><img src="images/0.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_1</p><i></i><em>35:01</em></a></li>
+            <li><a href="javascript:"><img src="images/1.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_2</p><i></i><em>41:52</em></a></li>
+            <li><a href="javascript:"><img src="images/2.jpg" alt=""><p>皇族RNG：皇话Ⅱ 第1期</p><i></i><em>09:13</em></a></li>
+            <li><a href="javascript:"><img src="images/3.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_2</p><i></i><em>35:23</em></a></li>
+            <li><a href="javascript:"><img src="images/4.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_1</p><i></i><em>43:03</em></a></li>
+            <li><a href="javascript:"><img src="images/5.jpg" alt=""><p>剑圣竟然隐身，这种剑法谁能防</p><i></i><em>11:11</em></a></li>
+            <li><a href="javascript:"><img src="images/6.jpg" alt=""><p>国服顶尖盲僧，操作诠释回旋踢真正奥义</p><i></i><em>08:56</em></a></li>
+            <li><a href="javascript:"><img src="images/7.jpg" alt=""><p>亚索专场：最强亚索争霸秀！别眨眼！每个镜头都无敌</p><i></i><em>14:09</em></a></li>
+            <li><a href="javascript:"><img src="images/0.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_1</p><i></i><em>35:01</em></a></li>
+            <li><a href="javascript:"><img src="images/1.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_2</p><i></i><em>41:52</em></a></li>
+            <li><a href="javascript:"><img src="images/2.jpg" alt=""><p>皇族RNG：皇话Ⅱ 第1期</p><i></i><em>09:13</em></a></li>
+            <li><a href="javascript:"><img src="images/3.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_2</p><i></i><em>35:23</em></a></li>
+            <li><a href="javascript:"><img src="images/4.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_1</p><i></i><em>43:03</em></a></li>
+            <li><a href="javascript:"><img src="images/5.jpg" alt=""><p>剑圣竟然隐身，这种剑法谁能防</p><i></i><em>11:11</em></a></li>
+            <li><a href="javascript:"><img src="images/6.jpg" alt=""><p>国服顶尖盲僧，操作诠释回旋踢真正奥义</p><i></i><em>08:56</em></a></li>
+            <li><a href="javascript:"><img src="images/7.jpg" alt=""><p>亚索专场：最强亚索争霸秀！别眨眼！每个镜头都无敌</p><i></i><em>14:09</em></a></li>
+           </ul>
+        <ul id="jssp" class="jssp pub">
+            <li><a href="javascript:"><img src="images/0.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_1</p><i></i><em>35:01</em></a></li>
+            <li><a href="javascript:"><img src="images/1.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_2</p><i></i><em>41:52</em></a></li>
+            <li><a href="javascript:"><img src="images/3.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_2</p><i></i><em>35:23</em></a></li>
+            <li><a href="javascript:"><img src="images/2.jpg" alt=""><p>皇族RNG：皇话Ⅱ 第1期</p><i></i><em>09:13</em></a></li>
+            <li><a href="javascript:"><img src="images/4.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_1</p><i></i><em>43:03</em></a></li>
+            <li><a href="javascript:"><img src="images/5.jpg" alt=""><p>剑圣竟然隐身，这种剑法谁能防</p><i></i><em>11:11</em></a></li>
+            <li><a href="javascript:"><img src="images/6.jpg" alt=""><p>国服顶尖盲僧，操作诠释回旋踢真正奥义</p><i></i><em>08:56</em></a></li>
+            <li><a href="javascript:"><img src="images/7.jpg" alt=""><p>亚索专场：最强亚索争霸秀！别眨眼！每个镜头都无敌</p><i></i><em>14:09</em></a></li>
+           <li><a href="javascript:"><img src="images/0.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_1</p><i></i><em>35:01</em></a></li>
+           <li><a href="javascript:"><img src="images/1.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_2</p><i></i><em>41:52</em></a></li>
+           <li><a href="javascript:"><img src="images/2.jpg" alt=""><p>皇族RNG：皇话Ⅱ 第1期</p><i></i><em>09:13</em></a></li>
+           <li><a href="javascript:"><img src="images/3.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_2</p><i></i><em>35:23</em></a></li>
+           <li><a href="javascript:"><img src="images/4.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_1</p><i></i><em>43:03</em></a></li>
+           <li><a href="javascript:"><img src="images/5.jpg" alt=""><p>剑圣竟然隐身，这种剑法谁能防</p><i></i><em>11:11</em></a></li>
+           <li><a href="javascript:"><img src="images/6.jpg" alt=""><p>国服顶尖盲僧，操作诠释回旋踢真正奥义</p><i></i><em>08:56</em></a></li>
+           <li><a href="javascript:"><img src="images/7.jpg" alt=""><p>亚索专场：最强亚索争霸秀！别眨眼！每个镜头都无敌</p><i></i><em>14:09</em></a></li>
+        </ul>
+        <ul id="zmyx" class="zmyx pub">
+            <li><a href="javascript:"><img src="images/0.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_1</p><i></i><em>35:01</em></a></li>
+            <li><a href="javascript:"><img src="images/1.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_2</p><i></i><em>41:52</em></a></li>
+            <li><a href="javascript:"><img src="images/2.jpg" alt=""><p>皇族RNG：皇话Ⅱ 第1期</p><i></i><em>09:13</em></a></li>
+            <li><a href="javascript:"><img src="images/4.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_1</p><i></i><em>43:03</em></a></li>
+            <li><a href="javascript:"><img src="images/3.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_2</p><i></i><em>35:23</em></a></li>
+            <li><a href="javascript:"><img src="images/5.jpg" alt=""><p>剑圣竟然隐身，这种剑法谁能防</p><i></i><em>11:11</em></a></li>
+            <li><a href="javascript:"><img src="images/6.jpg" alt=""><p>国服顶尖盲僧，操作诠释回旋踢真正奥义</p><i></i><em>08:56</em></a></li>
+            <li><a href="javascript:"><img src="images/7.jpg" alt=""><p>亚索专场：最强亚索争霸秀！别眨眼！每个镜头都无敌</p><i></i><em>14:09</em></a></li>
+           <li><a href="javascript:"><img src="images/0.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_1</p><i></i><em>35:01</em></a></li>
+           <li><a href="javascript:"><img src="images/1.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_2</p><i></i><em>41:52</em></a></li>
+           <li><a href="javascript:"><img src="images/2.jpg" alt=""><p>皇族RNG：皇话Ⅱ 第1期</p><i></i><em>09:13</em></a></li>
+           <li><a href="javascript:"><img src="images/3.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_2</p><i></i><em>35:23</em></a></li>
+           <li><a href="javascript:"><img src="images/4.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_1</p><i></i><em>43:03</em></a></li>
+           <li><a href="javascript:"><img src="images/5.jpg" alt=""><p>剑圣竟然隐身，这种剑法谁能防</p><i></i><em>11:11</em></a></li>
+           <li><a href="javascript:"><img src="images/6.jpg" alt=""><p>国服顶尖盲僧，操作诠释回旋踢真正奥义</p><i></i><em>08:56</em></a></li>
+           <li><a href="javascript:"><img src="images/7.jpg" alt=""><p>亚索专场：最强亚索争霸秀！别眨眼！每个镜头都无敌</p><i></i><em>14:09</em></a></li>
+        </ul>
+        <ul id="sssp" class="sssp pub">
+            <li><a href="javascript:"><img src="images/0.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_1</p><i></i><em>35:01</em></a></li>
+            <li><a href="javascript:"><img src="images/1.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_2</p><i></i><em>41:52</em></a></li>
+            <li><a href="javascript:"><img src="images/2.jpg" alt=""><p>皇族RNG：皇话Ⅱ 第1期</p><i></i><em>09:13</em></a></li>
+            <li><a href="javascript:"><img src="images/3.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_2</p><i></i><em>35:23</em></a></li>
+            <li><a href="javascript:"><img src="images/4.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_1</p><i></i><em>43:03</em></a></li>
+            <li><a href="javascript:"><img src="images/6.jpg" alt=""><p>国服顶尖盲僧，操作诠释回旋踢真正奥义</p><i></i><em>08:56</em></a></li>
+            <li><a href="javascript:"><img src="images/5.jpg" alt=""><p>剑圣竟然隐身，这种剑法谁能防</p><i></i><em>11:11</em></a></li>
+            <li><a href="javascript:"><img src="images/0.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_1</p><i></i><em>35:01</em></a></li>
+            <li><a href="javascript:"><img src="images/7.jpg" alt=""><p>亚索专场：最强亚索争霸秀！别眨眼！每个镜头都无敌</p><i></i><em>14:09</em></a></li>
+           <li><a href="javascript:"><img src="images/1.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_2</p><i></i><em>41:52</em></a></li>
+           <li><a href="javascript:"><img src="images/2.jpg" alt=""><p>皇族RNG：皇话Ⅱ 第1期</p><i></i><em>09:13</em></a></li>
+           <li><a href="javascript:"><img src="images/3.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_2</p><i></i><em>35:23</em></a></li>
+           <li><a href="javascript:"><img src="images/4.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_1</p><i></i><em>43:03</em></a></li>
+           <li><a href="javascript:"><img src="images/5.jpg" alt=""><p>剑圣竟然隐身，这种剑法谁能防</p><i></i><em>11:11</em></a></li>
+           <li><a href="javascript:"><img src="images/6.jpg" alt=""><p>国服顶尖盲僧，操作诠释回旋踢真正奥义</p><i></i><em>08:56</em></a></li>
+           <li><a href="javascript:"><img src="images/7.jpg" alt=""><p>亚索专场：最强亚索争霸秀！别眨眼！每个镜头都无敌</p><i></i><em>14:09</em></a></li>
+        </ul>
+        <ul id="qwjj" class="qwjj pub">
+            <li><a href="javascript:"><img src="images/1.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_2</p><i></i><em>41:52</em></a></li>
+            <li><a href="javascript:"><img src="images/2.jpg" alt=""><p>皇族RNG：皇话Ⅱ 第1期</p><i></i><em>09:13</em></a></li>
+            <li><a href="javascript:"><img src="images/0.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_1</p><i></i><em>35:01</em></a></li>
+            <li><a href="javascript:"><img src="images/3.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_2</p><i></i><em>35:23</em></a></li>
+            <li><a href="javascript:"><img src="images/4.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_1</p><i></i><em>43:03</em></a></li>
+            <li><a href="javascript:"><img src="images/5.jpg" alt=""><p>剑圣竟然隐身，这种剑法谁能防</p><i></i><em>11:11</em></a></li>
+            <li><a href="javascript:"><img src="images/6.jpg" alt=""><p>国服顶尖盲僧，操作诠释回旋踢真正奥义</p><i></i><em>08:56</em></a></li>
+            <li><a href="javascript:"><img src="images/7.jpg" alt=""><p>亚索专场：最强亚索争霸秀！别眨眼！每个镜头都无敌</p><i></i><em>14:09</em></a></li>
+           <li><a href="javascript:"><img src="images/0.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_1</p><i></i><em>35:01</em></a></li>
+           <li><a href="javascript:"><img src="images/1.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_2</p><i></i><em>41:52</em></a></li>
+           <li><a href="javascript:"><img src="images/2.jpg" alt=""><p>皇族RNG：皇话Ⅱ 第1期</p><i></i><em>09:13</em></a></li>
+           <li><a href="javascript:"><img src="images/3.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_2</p><i></i><em>35:23</em></a></li>
+            <li><a href="javascript:"><img src="images/5.jpg" alt=""><p>剑圣竟然隐身，这种剑法谁能防</p><i></i><em>11:11</em></a></li>
+            <li><a href="javascript:"><img src="images/4.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_1</p><i></i><em>43:03</em></a></li>
+           <li><a href="javascript:"><img src="images/6.jpg" alt=""><p>国服顶尖盲僧，操作诠释回旋踢真正奥义</p><i></i><em>08:56</em></a></li>
+           <li><a href="javascript:"><img src="images/7.jpg" alt=""><p>亚索专场：最强亚索争霸秀！别眨眼！每个镜头都无敌</p><i></i><em>14:09</em></a></li>
+        </ul>
+        <ul id="gfsp" class="gfsp pub">
+            <li><a href="javascript:"><img src="images/0.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_1</p><i></i><em>35:01</em></a></li>
+            <li><a href="javascript:"><img src="images/1.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_2</p><i></i><em>41:52</em></a></li>
+            <li><a href="javascript:"><img src="images/2.jpg" alt=""><p>皇族RNG：皇话Ⅱ 第1期</p><i></i><em>09:13</em></a></li>
+            <li><a href="javascript:"><img src="images/3.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_2</p><i></i><em>35:23</em></a></li>
+            <li><a href="javascript:"><img src="images/4.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_1</p><i></i><em>43:03</em></a></li>
+            <li><a href="javascript:"><img src="images/5.jpg" alt=""><p>剑圣竟然隐身，这种剑法谁能防</p><i></i><em>11:11</em></a></li>
+            <li><a href="javascript:"><img src="images/6.jpg" alt=""><p>国服顶尖盲僧，操作诠释回旋踢真正奥义</p><i></i><em>08:56</em></a></li>
+            <li><a href="javascript:"><img src="images/7.jpg" alt=""><p>亚索专场：最强亚索争霸秀！别眨眼！每个镜头都无敌</p><i></i><em>14:09</em></a></li>
+           <li><a href="javascript:"><img src="images/0.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_1</p><i></i><em>35:01</em></a></li>
+           <li><a href="javascript:"><img src="images/1.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 RYL vs LD_2</p><i></i><em>41:52</em></a></li>
+           <li><a href="javascript:"><img src="images/2.jpg" alt=""><p>皇族RNG：皇话Ⅱ 第1期</p><i></i><em>09:13</em></a></li>
+           <li><a href="javascript:"><img src="images/3.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_2</p><i></i><em>35:23</em></a></li>
+           <li><a href="javascript:"><img src="images/4.jpg" alt=""><p>LSPL2017春季赛常规赛第六周 ING vs SAT_1</p><i></i><em>43:03</em></a></li>
+            <li><a href="javascript:"><img src="images/7.jpg" alt=""><p>亚索专场：最强亚索争霸秀！别眨眼！每个镜头都无敌</p><i></i><em>14:09</em></a></li>
+            <li><a href="javascript:"><img src="images/5.jpg" alt=""><p>剑圣竟然隐身，这种剑法谁能防</p><i></i><em>11:11</em></a></li>
+            <li><a href="javascript:"><img src="images/6.jpg" alt=""><p>国服顶尖盲僧，操作诠释回旋踢真正奥义</p><i></i><em>08:56</em></a></li>
+        </ul>
+       </div>
+        <div class="show8 tc" id="show8">再显示<em> 8 </em>个视频</div>
+    </div>
+        <div class="matchcenter pr clearfix">
+            <h1 class="tl"><em class="dib icon_matchcenter"></em>赛事中心</h1>
+            <a href="javascript:" class="enter_match pa"><span class="pa tc ent">进入赛事中心</span></a>
+            <div class="main2_nav_match" id="main2_nav_match">
+                <ul>
+                    <li>职业联赛</li>
+                    <li>甲级职业联赛</li>
+                    <li>德玛西亚杯</li>
+                    <li>高校联赛</li>
+                    <li>城市英雄争霸赛</li>
+                    <li>王者峡谷</li>
+                </ul>
+            </div>
+            <div class="sixlayout">
+                <div id="zyls" style="display: block">
+                <div class="matchleft zyls fl" >
+                    <a href="javascript:"><img src="images/zyls.jpg" alt=""></a>
+                    <a class="enter_matchindex tc" href="javascript:">进入赛事页面</a>
+                </div>
+                <div class="matchright fl">
+                    <div class="matchrighttop">
+                        <h1>2017英雄联盟职业联赛春季赛</h1>
+                            <h2>时间：2017-01-19-2017-04-30</h2>
+                            <h2>地点：上海正大广场9楼</h2>
+                        <p class="tc"><em>4200</em>万人关注</p>
+                    </div>
+                    <div class="matchrightbottom">
+                        <ul>
+                            <li><a href="javascript:">3月10日EDG战IG 最强中单对决</a><em>03/10</em></li>
+                            <li><a href="javascript:">3月9日LPL精彩集锦：Swift男枪抢大龙</a><em>03/10</em></li>
+                            <li><a href="javascript:">新秀Kabe：QG前进路上的关键先生</a><em>03/10</em></li>
+                            <li><a href="javascript:">3月9日LPL预告全华班 OMG战VG</a><em>03/09</em></li>
+                            <li><a href="javascript:">LPL上周数据回顾 新生west拿下五杀</a><em>03/07</em></li>
+                            <li><a href="javascript:">LPL上周大事记回顾 RNG赢得六连胜</a><em>03/07</em></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+                <div id="jjzyls">
+                    <div class="matchleft zyls fl" >
+                        <a href="javascript:"><img src="images/jjzyls.jpg" alt=""></a>
+                        <a class="enter_matchindex tc" href="javascript:">进入赛事页面</a>
+                    </div>
+                    <div class="matchright fl">
+                        <div class="matchrighttop">
+                            <h1>2017英雄联盟职业联赛春季赛</h1>
+                            <h2>时间：2017-01-19-2017-04-30</h2>
+                            <h2>地点：上海正大广场9楼</h2>
+                            <p class="tc"><em>700</em>万人关注</p>
+                        </div>
+                        <div class="matchrightbottom">
+                            <ul>
+                                <li><a href="javascript:">3月10日EDG战IG 最强中单对决</a><em>03/10</em></li>
+                                <li><a href="javascript:">3月9日LPL精彩集锦：Swift男枪抢大龙</a><em>03/10</em></li>
+                                <li><a href="javascript:">新秀Kabe：QG前进路上的关键先生</a><em>03/10</em></li>
+                                <li><a href="javascript:">3月9日LPL预告全华班 OMG战VG</a><em>03/09</em></li>
+                                <li><a href="javascript:">LPL上周数据回顾 新生west拿下五杀</a><em>03/07</em></li>
+                                <li><a href="javascript:">LPL上周大事记回顾 RNG赢得六连胜</a><em>03/07</em></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="dmxyb">
+                <div class="matchleft zyls fl" >
+                    <a href="javascript:"><img src="images/dmxyb.jpg" alt=""></a>
+                    <a class="enter_matchindex tc" href="javascript:">进入赛事页面</a>
+                </div>
+                <div class="matchright fl">
+                    <div class="matchrighttop">
+                        <h1>2017英雄联盟职业联赛春季赛</h1>
+                            <h2>时间：2017-01-19-2017-04-30</h2>
+                            <h2>地点：上海正大广场9楼</h2>
+                        <p class="tc"><em>800</em>万人关注</p>
+                    </div>
+                    <div class="matchrightbottom">
+                        <ul>
+                            <li><a href="javascript:">3月10日EDG战IG 最强中单对决</a><em>03/10</em></li>
+                            <li><a href="javascript:">3月9日LPL精彩集锦：Swift男枪抢大龙</a><em>03/10</em></li>
+                            <li><a href="javascript:">新秀Kabe：QG前进路上的关键先生</a><em>03/10</em></li>
+                            <li><a href="javascript:">3月9日LPL预告全华班 OMG战VG</a><em>03/09</em></li>
+                            <li><a href="javascript:">LPL上周数据回顾 新生west拿下五杀</a><em>03/07</em></li>
+                            <li><a href="javascript:">LPL上周大事记回顾 RNG赢得六连胜</a><em>03/07</em></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+                <div id="gxls">
+                    <div class="matchleft zyls fl" >
+                        <a href="javascript:"><img src="images/qggxls.jpg" alt=""></a>
+                        <a class="enter_matchindex tc" href="javascript:">进入赛事页面</a>
+                    </div>
+                    <div class="matchright fl">
+                        <div class="matchrighttop">
+                            <h1>2017英雄联盟职业联赛春季赛</h1>
+                            <h2>时间：2017-01-19-2017-04-30</h2>
+                            <h2>地点：上海正大广场9楼</h2>
+                            <p class="tc"><em>500</em>万人关注</p>
+                        </div>
+                        <div class="matchrightbottom">
+                            <ul>
+                                <li><a href="javascript:">3月10日EDG战IG 最强中单对决</a><em>03/10</em></li>
+                                <li><a href="javascript:">3月9日LPL精彩集锦：Swift男枪抢大龙</a><em>03/10</em></li>
+                                <li><a href="javascript:">新秀Kabe：QG前进路上的关键先生</a><em>03/10</em></li>
+                                <li><a href="javascript:">3月9日LPL预告全华班 OMG战VG</a><em>03/09</em></li>
+                                <li><a href="javascript:">LPL上周数据回顾 新生west拿下五杀</a><em>03/07</em></li>
+                                <li><a href="javascript:">LPL上周大事记回顾 RNG赢得六连胜</a><em>03/07</em></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="csyxzbs">
+                <div class="matchleft zyls fl" >
+                    <a href="javascript:"><img src="images/csyxzbs.jpg" alt=""></a>
+                    <a class="enter_matchindex tc" href="javascript:">进入赛事页面</a>
+                </div>
+                <div class="matchright fl">
+                    <div class="matchrighttop">
+                        <h1>2017英雄联盟职业联赛春季赛</h1>
+                            <h2>时间：2017-01-19-2017-04-30</h2>
+                            <h2>地点：上海正大广场9楼</h2>
+                        <p class="tc"><em>400</em>万人关注</p>
+                    </div>
+                    <div class="matchrightbottom">
+                        <ul>
+                            <li><a href="javascript:">3月10日EDG战IG 最强中单对决</a><em>03/10</em></li>
+                            <li><a href="javascript:">3月9日LPL精彩集锦：Swift男枪抢大龙</a><em>03/10</em></li>
+                            <li><a href="javascript:">新秀Kabe：QG前进路上的关键先生</a><em>03/10</em></li>
+                            <li><a href="javascript:">3月9日LPL预告全华班 OMG战VG</a><em>03/09</em></li>
+                            <li><a href="javascript:">LPL上周数据回顾 新生west拿下五杀</a><em>03/07</em></li>
+                            <li><a href="javascript:">LPL上周大事记回顾 RNG赢得六连胜</a><em>03/07</em></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+                <div id="wzxg">
+                    <div class="matchleft zyls fl" >
+                        <a href="javascript:"><img src="images/wzxg.jpg" alt=""></a>
+                        <a class="enter_matchindex tc" href="javascript:">进入赛事页面</a>
+                    </div>
+                    <div class="matchright fl">
+                        <div class="matchrighttop">
+                            <h1>2017英雄联盟职业联赛春季赛</h1>
+                            <h2>时间：2017-01-19-2017-04-30</h2>
+                            <h2>地点：上海正大广场9楼</h2>
+                            <p class="tc"><em>100</em>万人关注</p>
+                        </div>
+                        <div class="matchrightbottom">
+                            <ul>
+                                <li><a href="javascript:">3月10日EDG战IG 最强中单对决</a><em>03/10</em></li>
+                                <li><a href="javascript:">3月9日LPL精彩集锦：Swift男枪抢大龙</a><em>03/10</em></li>
+                                <li><a href="javascript:">新秀Kabe：QG前进路上的关键先生</a><em>03/10</em></li>
+                                <li><a href="javascript:">3月9日LPL预告全华班 OMG战VG</a><em>03/09</em></li>
+                                <li><a href="javascript:">LPL上周数据回顾 新生west拿下五杀</a><em>03/07</em></li>
+                                <li><a href="javascript:">LPL上周大事记回顾 RNG赢得六连胜</a><em>03/07</em></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="service pr clearfix">
+            <h1 class="tl"><em class="dib icon_service"></em>客服专区</h1>
+            <a href="javascript:" class="online_service pa"><span class="pa tc on_service">QQ在线客服</span><a class="pa servicemore " href="javascript:">···</a></a>
+            <div class="main2_nav_service" id="main2_nav_service">
+                <ul>
+                    <li>自助服务</li>
+                    <li>常见问题列表</li>
+                </ul>
+                <div class="matter_other pa">
+                    <a href="javascript:">登陆相关</a>
+                    <a href="javascript:">游戏相关</a>
+                    <a href="javascript:">电脑及其他问题</a>
+                </div>
+            </div>
+            <div class="matterdetail ">
+                <div  class="self_service">
+                    <ul  class="clearfix">
+                        <li id="self_service" class="mainli clearfix">
+                            <ul class="clearfix">
+                            <li><a href="javascript:">英雄联盟（LOL）晋级助手</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）封号申诉相关问题</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）如何查看皮肤特效</a></li>
+                            <li><a href="javascript:">新版本匹配机制FAQ</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）限定皮肤获得方法</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）常见规则</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）点券充错大区了怎么办？</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）游戏商城黑屏</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）聊天框弹出中奖信息/举报虚假信息的说明</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）对电脑配置有什么要求？</a></li>
+                            </ul>
+                        </li>
+                        <li id="FAQ" class="mainli clearfix" style="display: none">
+                            <ul class="clearfix">
+                            <li><a href="javascript:">英雄联盟冲值充错大区了怎么办？【该自助工具目前无法使用】</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）排位赛/晋级赛（胜点、段位、级位）扣分规则</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）登录提示“登录错误，登录服务器未响</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）登录成功后提示：服务器连接异常，即将退出</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）PVP.NET断开连接的处理方法</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）登录成功后提示：未知错误，未知的错误发生了</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）登录时发生ActionScript错误</a></li>
+                            <li><a href="javascript:">英雄联盟（LOL）Adobe Air 错误提示</a></li>
+                            <li><a href="javascript:">登录时，提示：服务器正忙，请稍后再试（登录错误）</a></li>
+                            <li><a href="javascript:">拉起游戏时提示：连接失败，无法连接服务器</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="main2_r fl clearfix">
+         <div class="hero_skin fl pr clearfix">
+             <h1 class="tl"><em class="dib icon_hero_skin"></em>英雄/皮肤</h1>
+             <a href="javascript:" class="h_s pa">
+                 <span class="pa tc all_heros">全部英雄</span>
+                 <span class="pa tc myhero" >我的英雄与皮肤</span>
+             </a>
+             <div class="main2_nav_hero" id="main2_nav_hero">
+                 <ul>
+                     <li>周免英雄</li>
+                     <li>最新英雄</li>
+                     <li>最新皮肤</li>
+                 </ul>
+             </div>
+             <div class="free_hero p15" id="free_hero">
+                <div class="free_hero_width clearfix">
+
+                 <a href="javascript:">
+                     <img src="images/yfl.jpg" alt="1212">
+                     <em class="txt-describe pa">寡妇制造者</em>
+                 </a>
+                 <a href="javascript:">
+                     <img src="images/wqds.jpg" alt="333">
+                     <em class="txt-describe">武器大师</em>
+                 </a>
+                 <a href="javascript:">
+                     <img src="images/j.jpg" alt="">
+                     <em class="txt-describe">戏命师</em>
+                 </a>
+                 <a href="javascript:">
+                     <img src="images/jks.jpg" alt="">
+                     <em class="txt-describe">暴走萝莉</em>
+                 </a>
+                 <a href="javascript:">
+                     <img src="images/kem.jpg" alt="">
+                     <em class="txt-describe">天启者</em>
+                 </a>
+                 <a href="javascript:">
+                     <img src="images/ksd.jpg" alt="">
+                     <em class="txt-describe">虚空行者</em>
+                 </a>
+                 <a href="javascript:">
+                     <img src="images/lon.jpg" alt="">
+                     <em class="txt-describe">曙光女神</em>
+                 </a>
+                 <a href="javascript:">
+                     <img src="images/alan.jpg" alt="">
+                     <em class="txt-describe">发条魔灵</em>
+                 </a>
+                 <a href="javascript:">
+                     <img src="images/wj.jpg" alt="">
+                     <em class="txt-describe">邪恶小法师</em>
+                 </a>
+                 <a href="javascript:">
+                     <img src="images/zk.jpg" alt="">
+                     <em class="txt-describe">生化魔人</em>
+                 </a>
+                </div>
+                 <div class="free_time">免费时间：2017-03-10 至 2017-03-17</div>
+             </div>
+             <div class="latest_hero p15" id="latest_hero">
+                 <div class="free_hero_width">
+                     <a href="javascript:">
+                         <img src="images/qgy.jpg" alt="">
+                         <em><span class="first_name">卡密尔</span>
+                         <span class="last_name">青钢影</span></em>
+                     </a>
+                     <a href="javascript:">
+                         <img src="images/aw.jpg" alt="">
+                         <em><span class="first_name">爱翁</span>
+                         <span class="last_name">翠神</span></em>
+                     </a>
+                     <a href="javascript:">
+                         <img src="images/kl.jpg" alt="">
+                         <em><span class="first_name">暴怒骑士</span>
+                         <span class="last_name">克烈</span></em>
+                     </a>
+                     <a href="javascript:">
+                         <img src="images/yq.jpg" alt="">
+                         <em><span class="first_name">塔莉亚</span>
+                         <span class="last_name">岩雀</span></em>
+                     </a>
+                     <a href="javascript:">
+                         <img src="images/se.jpg" alt="">
+                         <em><span class="first_name">奥瑞利安</span>
+                         <span class="last_name">索尔</span></em>
+                     </a>
+                 </div>
+             </div>
+             <div class="latest_skin p15" id="latest_skin">
+                 <div class="free_hero_width">
+                     <a href="javascript:" >
+                         <img src="images/glazew.jpg" alt="" >
+                         <em><span class="first_name">雄鸡限定</span>
+                         <span class="last_name">盖伦</span>
+                         <span class="last_name2 last_name">阿兹尔</span>
+                         <span class="last_name3 last_name">蔚</span></em>
+                     </a>
+                     <a href="javascript:">
+                         <img src="images/lks.jpg" alt="">
+                         <em><span class="first_name">大元素使</span>
+                         <span class="last_name">拉克丝</span></em>
+                     </a>
+                     <a href="javascript:">
+                         <img src="images/mfsv.jpg" alt="">
+                         <em><span class="first_name">魔法少女</span>
+                         <span class="last_name">金克斯</span>
+                         <span class="last_name2 last_name">拉克丝</span>
+                         <span class="last_name3 last_name">迦娜</span>
+                         <span class="last_name4 last_name">波比</span>
+                         <span class="last_name5 last_name">璐璐</span></em>
+                     </a>
+                     <a href="javascript:">
+                         <img src="images/ycpd.jpg" alt="">
+                         <em><span class="first_name">泳池派对</span>
+                         <span class="last_name">厄运小姐</span>
+                         <span class="last_name2 last_name">塔里克</span>
+                         <span class="last_name3 last_name">菲奥娜</span></em>
+                     </a>
+                     <a href="javascript:">
+                         <img src="images/hhj.jpg" alt="">
+                         <em><span class="first_name">海皇姬</span>
+                         <span class="last_name">娜美</span></em>
+                     </a>
+                 </div>
+             </div>
+        </div>
+         <div class="quick_enter fl pr clearfix">
+             <h1 class="tl"><em class="dib icon_quick_enter"></em>快速入口</h1>
+             <div class="quick_icon">
+                 <div class="quick_icon_width" id="quick_icon_width">
+                     <a class="q_i fl" href="javascript:"><i class="urlp db icon1"></i>英雄联盟宇宙</a>
+                     <a class="q_i fl" href="javascript:"><i class="urlp db icon2"></i>周边商城</a>
+                     <a class="q_i fl" href="javascript:"><i class="urlp db icon3"></i>点亮图标</a>
+                     <a class="q_i fl" href="javascript:"><i class="urlp db icon4"></i>声望系统</a>
+                     <a class="q_i fl" href="javascript:"><i class="urlp db icon5"></i>CDK兑换</a>
+                     <a class="q_i fl" href="javascript:"><i class="urlp db icon6"></i>模式实验室</a>
+                     <a class="q_i fl" href="javascript:"><i class="urlp db icon7"></i>游戏资料</a>
+                     <a class="q_i fl" href="javascript:"><i class="urlp db icon8"></i>领奖中心</a>
+                     <a class="q_i fl" href="javascript:"><i class="urlp db icon9"></i>官方微博</a>
+                     <a class="q_i fl" href="javascript:"><i class="urlp db icon10"></i>玩家论坛</a>
+                     <a class="q_i fl" href="javascript:"><i class="urlp db icon11"></i>在线客服</a>
+                 </div>
+             </div>
+         </div>
+         <div class="event_center fl pr clearfix">
+             <h1 class="tl"><em class="dib icon_event_center"></em>活动中心</h1>
+             <a href="javascript:" class="pa e_e">
+                 <span class="pa tc enter_event">进入活动中心</span>
+             </a>
+             <div class="event_detail">
+                 <div class="event_detail_l fl pr" id="event_detail_l">
+                     <img src="images/eyxjdlw.jpg" alt="">
+                     <span class="tc shadow pa">厄运小姐的赏金任务</span>
+                     <div class="event_intro pa">
+                         <a class="db" id="event_intro_a" href="javascript:">
+                             <h1>活动简介</h1>
+                         <i class="db">完成每周任务，即可获得相应奖励；完成赏金任务，可以得到更丰厚的奖励。</i>
+                         <span class="db">查看活动详情</span>
+                         </a>
+                     </div>
+                 </div>
+                 <div class="event_detail_r fl" id="event_detail_r">
+                     <ul>
+                         <li><a href="javascript:"><i class="fl">新手召唤师大礼包</i><em class="fr">进行中</em></a></li>
+                         <li><a class="enda" href="javascript:"><i class="fl endi">情人节活动</i><em class="fr end">已结束</em></a></li>
+                         <li><a href="javascript:"><i class="fl">英雄联盟全新混音专辑--《战歌》</i><em class="fr">进行中</em></a></li>
+                         <li><a href="javascript:"><i class="fl">五杀乐队头像领取</i><em class="fr">进行中</em></a></li>
+                         <li><a href="javascript:"><i class="fl">全国高校排行榜</i><em class="fr">进行中</em></a></li>
+                         <li><a href="javascript:"><i class="fl">老兵不死，只是凋零。统治战场正式退役</i><em class="fr">进行中</em></a></li>
+                         <li><a href="javascript:"><i class="fl">兑换中心</i><em class="fr">进行中</em></a></li>
+                     </ul>
+                 </div>
+             </div>
+         </div>
+         <div class="qt_store fl clearfix" id="qt_store">
+             <a class="db top5" href="javascript:"><img src="images/qtyy.jpg" alt=""></a>
+             <a class="db" href="javascript:"><img src="images/zbsc.jpg" alt=""></a>
+         </div>
+</div>
+</div>
+<!--主体2结束-->
+<!--尾部开始-->
+<div class="w footer clearfix pr">
+    <div class="hideteam_work pa" id="hideteam_work">
+        <ul id="hideteam_work_ul">
+            <li><a href="javascript:">英雄联盟大咖</a></li>
+            <li><a href="javascript:">要我玩</a></li>
+            <li><a href="javascript:">木木不哭</a></li>
+            <li><a href="javascript:">17173</a></li>
+            <li><a href="javascript:">叶子猪</a></li>
+            <li><a href="javascript:">特玩</a></li>
+            <li><a href="javascript:">兔玩</a></li>
+            <li><a href="javascript:">52PK游戏网</a></li>
+            <li><a href="javascript:">锐派</a></li>
+            <li><a href="javascript:">玩加赛事</a></li>
+            <li><a href="javascript:">电玩巴士</a></li>
+            <li><a href="javascript:">爱拍游戏</a></li>
+        </ul>
+    </div>
+    <div class="footertop pr clearfix">
+        <div class="ewm fl"></div>
+        <ul class="fl">
+            <li class="fl li1">
+                <h1>英雄，我们在这里等你</h1>
+                <p>扫描下载《英雄联盟》官方APP，</p>
+                <p>获取最新最全的官方动态</p>
+            </li>
+            <li class="fl li2">
+                <h1> 温馨提示：本游戏适合18岁(含)以上玩家娱乐</h1>
+                <span class="fl">抵制不良游戏</span>
+                <span class="fl">拒绝盗版游戏</span>
+                <span class="fl">注意自我保护</span>
+                <span class="fl">谨防受骗上当</span>
+                <span class="fl">适度游戏益脑</span>
+                <span class="fl">沉迷游戏伤身</span>
+                <span class="fl">合理安排时间</span>
+                <span class="fl">享受健康生活</span>
+            </li>
+            <li class="fl li3" id="li3">
+              <div class="teamwork pr">
+                  <p class="team_work_txt" id="team_work_txt">英雄联盟 官方合作媒体</p>
+                  <p class="pa team_work_arrow">
+                     <span class="pa shadowarrow"> <i class="pa arrow">◇</i></span>
+                  </p>
+              </div>
+            </li>
+        </ul>
+    </div>
+    <div class="footerbottom">
+        <div class="zuo fl">
+            <a href="javascript:" class="db"></a>
+        </div>
+        <div class="you fr">
+            <ul>
+                <li class="you1 fl">
+                    <a href="javascript:">腾讯互动娱乐</a>
+                    <span>|</span>
+                    <a href="javascript:">服务条款</a>
+                    <span>|</span>
+                    <a href="javascript:">广告服务</a>
+                    <span>|</span>
+                    <a href="javascript:">腾讯游戏招聘</a>
+                    <span>|</span>
+                    <a href="javascript:">腾讯游戏客服</a>
+                    <span>|</span>
+                    <a href="javascript:">游戏活动</a>
+                    <span>|</span>
+                    <a href="javascript:">游戏地图</a>
+                    <span>|</span>
+                    <a href="javascript:">商务合作</a>
+                    <span>|</span>
+                    <a href="javascript:">腾讯网</a>
+                    <span>|</span>
+                    <a href="javascript:">网站导航</a>
+                </li>
+                <li class="you2 fl">
+                    <i class="fl">COPYRIGHT © 1998 - 2017 TENCENT. ALL RIGHTS RESERVED.</i><a href="javascript:" id="copyright">腾讯公司版权所有</a>
+                </li>
+                <li class="you3 fl">© 2012 Riot Games, Inc. ALL RIGHTS RESERVED.</li>
+                <li class="you4 fl"><i class="fl">文网进字[2011] 004号 & ISBN 978-7-89989-145-2</i><span>|</span><a href="javascript:">新出网证（粤）字010号</a><span>|</span><a
+                        href="javascript:">粤网文[2014]0633-233号</a></li>
+                <li class="you5 fl"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--尾部结束-->
+</body>
+</html>
