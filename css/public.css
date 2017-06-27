@@ -341,7 +341,8 @@ padding: 17px 0 0 20px;
     width: 36px;
     height: 32px;
     padding: 0;
-    font:  32px/32px "Micorosoft YaHei";
+    font:   26px/32px "Simsun";
+    letter-spacing: -16px;
 
 }
 .main .main_r .nav li {
